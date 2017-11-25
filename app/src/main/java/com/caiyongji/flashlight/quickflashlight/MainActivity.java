@@ -1,14 +1,11 @@
 package com.caiyongji.flashlight.quickflashlight;
 
 import android.content.Context;
-import android.hardware.Camera;
-import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -17,16 +14,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+    private final String TAG = "caiyongji";
     private ToggleButton toggleButton;
     private CameraManager cameraManager;
     public String cameraId;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        init();
-        flashOn();
-        toggleButton = (ToggleButton) findViewById(R.id.toggleButton);
+        toggleButton = findViewById(R.id.toggleButton);
         toggleButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (toggleButton.isChecked()) {
@@ -36,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        init();
+        flashOn();
     }
 
     private void init() {
@@ -51,37 +50,49 @@ public class MainActivity extends AppCompatActivity {
                         public void onTorchModeChanged(@NonNull String cameraId, boolean enabled) {
                             super.onTorchModeChanged(cameraId, enabled);
                             //NO need to check cameraId
-                            if (enabled){
+                            if (enabled) {
                                 toggleButton.setChecked(true);
                                 toggleButton.setBackground(getDrawable(R.drawable.ic_highlight_yellow_24dp));
-                            }else {
+                            } else {
                                 toggleButton.setChecked(false);
                                 toggleButton.setBackground(getDrawable(R.drawable.ic_highlight_black_24dp));
                             }
                         }
-                    },null);
+                    }, null);
                     return;
                 }
             }
-        } catch (CameraAccessException e) {
-            Log.e("caiyongji", e.getMessage());
-            Toast.makeText(this, R.string.flash_error, Toast.LENGTH_LONG).show();
+        } catch (Exception e) {
+//            Log.e(TAG, e.getMessage());
+            Toast.makeText(this, R.string.flash_error, Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void flashOn(){
+    public void flashOn() {
+        if (cameraId == null) {
+            toggleButton.setChecked(true);
+            toggleButton.setBackground(getDrawable(R.drawable.ic_highlight_yellow_24dp));
+            return;
+        }
         try {
             cameraManager.setTorchMode(cameraId, true);
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+//            Log.e(TAG, e.getMessage());
+            Toast.makeText(this, R.string.flash_error, Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void flashOff(){
+    public void flashOff() {
+        if (cameraId == null) {
+            toggleButton.setChecked(false);
+            toggleButton.setBackground(getDrawable(R.drawable.ic_highlight_black_24dp));
+            return;
+        }
         try {
             cameraManager.setTorchMode(cameraId, false);
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
+        } catch (Exception e) {
+//            Log.e(TAG, e.getMessage());
+            Toast.makeText(this, R.string.flash_error, Toast.LENGTH_SHORT).show();
         }
     }
 
