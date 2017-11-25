@@ -4,8 +4,8 @@ android {
     signingConfigs {
         config {
             keyAlias 'cai'
-            keyPassword 'Only1keybo'
-            storePassword 'Only1keybo'
+            keyPassword 'caiyongji'
+            storePassword 'caiyongji'
             storeFile file('T:/Android/caiyongji.jks')
         }
     }
