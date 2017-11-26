@@ -1,10 +1,10 @@
 # quickflashlight
 quick flashlight application
 
-####google play####
+#### google play
 
 [https://play.google.com/store/apps/details?id=com.caiyongji.flashlight.quickflashlight](https://play.google.com/store/apps/details?id=com.caiyongji.flashlight.quickflashlight)
 
-####apk download####
+#### apk download
 
 [https://github.com/caiyongji/quickflashlight/releases](https://github.com/caiyongji/quickflashlight/releases)
