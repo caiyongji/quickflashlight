@@ -3,7 +3,7 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            keyAlias 'cai'
+            keyAlias 'caiyongji'
             keyPassword 'caiyongji'
             storePassword 'caiyongji'
             storeFile file('T:/Android/caiyongji.jks')
@@ -14,8 +14,8 @@ android {
         applicationId "com.caiyongji.flashlight.quickflashlight"
         minSdkVersion 23
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 3
+        versionName "1.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         signingConfig signingConfigs.config
     }
